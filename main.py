@@ -4,7 +4,7 @@ import hashlib
 import hmac
 import json
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 
 app = Flask(__name__)
 API_KEY = os.environ['API_KEY']
