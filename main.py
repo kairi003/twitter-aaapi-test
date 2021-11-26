@@ -20,7 +20,7 @@ def top():
 def webhook_challenge():
     crc_token = request.args.get('crc_token', '')
     digest = hmac.new(CONSUMER_SECRET.encode(), crc_token.encode(), hashlib.sha256).digest()
-    response = {'response_content': 'sha256=' + base64.b64encode(digest)}
+    response = {'response_content': 'sha256=' + base64.b64encode(digest).decode()}
     return json.dumps(response)
 
 
