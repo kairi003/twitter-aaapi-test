@@ -16,15 +16,14 @@ def top():
     return 'hello'
 
 
-@app.route('/webhooks/twitter', methods=['GET'])
+@app.route('/webhook', methods=['GET'], strict_slashes=False)
 def webhook_challenge():
     crc_token = request.args.get('crc_token', '')
     digest = hmac.new(API_SECRET.encode(), crc_token.encode(), hashlib.sha256).digest()
     content = {'response_token': 'sha256=' + base64.b64encode(digest).decode()}
     return jsonify(content), 200
 
-
-@app.route('/webhooks/twitter', methods=['POST'])
+@app.route('/webhook', methods=['POST'], strict_slashes=False)
 def webhook():
     response = make_response('', 200)
     response.mimetype = "text/plain"
