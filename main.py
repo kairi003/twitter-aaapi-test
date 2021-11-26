@@ -1,19 +1,15 @@
-import discord
-import os
+import re
+import hashlib
+from flask import Flask, request
 
+app = Flask(__name__)
 
-client = discord.Client()
+@app.route('/')
+def top():
+  return 'hello'
 
-@client.event
-async def on_ready():
-    print("ログイン完了")
+@app.route('/twitter/webhook', methods=['GET', 'POST'])
+def webhook():
+    return 'Hello'
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith("$hello"):
-        await message.channel.send("Hello!")
-
-client.run(os.getenv('TOKEN'))
+app.run(port=8000)

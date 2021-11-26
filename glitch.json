@@ -1,5 +1,5 @@
 {
-  "install": "python3 -m pip install discord.py",
+  "install": "python3 -m pip install -r requirements.txt",
   "start": "PYTHONUNBUFFERED=true python3 main.py",
   "watch": {
     "ignore": ["\\.pyc$"],
