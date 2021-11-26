@@ -7,8 +7,8 @@ import json
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-CONSUMER_KEY = os.environ['CONSUMER_KEY']
-CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+API_KEY = os.environ['API_KEY']
+API_SECRET = os.environ['API_SECRET']
 
 
 @app.route('/')
@@ -19,7 +19,7 @@ def top():
 @app.route('/webhooks/twitter', methods=['GET'])
 def webhook_challenge():
     crc_token = request.args.get('crc_token', '')
-    digest = hmac.new(CONSUMER_SECRET.encode(), crc_token.encode(), hashlib.sha256).digest()
+    digest = hmac.new(API_SECRET.encode(), crc_token.encode(), hashlib.sha256).digest()
     content = {'response_token': 'sha256=' + base64.b64encode(digest).decode()}
     return jsonify(content), 200
 
